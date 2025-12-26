@@ -5,7 +5,7 @@
 创建虚拟环境
 
 ```bash
-$ conda create -n InternVL3_5-2B python=3.11 -y
+$ conda create -n InternVL3_5-2B python=3.9 -y
 $ conda activate InternVL3_5-2B
 ```
 
