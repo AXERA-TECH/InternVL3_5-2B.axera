@@ -29,7 +29,9 @@ $ python3 export_onnx.py -m /path/your/hugging_face/models/InternVL3_5-2B/ -o ./
 $ git clone https://huggingface.co/OpenGVLab/InternVL3_5-2B
 ```
 
-模型成功导出成功后会在 `vit-models` 目录中生成所需要的 `onnx` 模型. 注意, 某些 PyTorch 版本可以直接导出不需要 `hack_fuse` 操作的 `onnx`, 如果遇到 `hack_fuse` 错误, 可以忽略该问题, 手动进行 `onnxslim` 简化操作.
+模型成功导出成功后会在 `vit-models` 目录中生成所需要的 `onnx` 模型.
+
+> 注意, 某些 PyTorch 版本可以直接导出不需要 `hack_fuse` 操作的 `onnx`, 如果遇到 `hack_fuse` 错误, 可以忽略该问题, 手动进行 `onnxslim` 简化操作.
 
 ## 模型编译 (ONNX -> AXmodel)
 
@@ -66,6 +68,7 @@ $ cp compiled_output/compiled.axmodel ../python/vit-models/internvl_vit_model_1x
 ### Llama build
 
 ```bash
+# 编译上下文 2k, 最大 prefill 为 1k 的模型
 pulsar2 llm_build --input_path ../python/InternVL3_5-2B  --output_path ../python/InternVL3_5-2B_axmodel  --hidden_state_type bf16 --prefill_len 128 --kv_cache_len 2047 --last_kv_cache_len 128 --last_kv_cache_len 256 --last_kv_cache_len 384 --last_kv_cache_len 512 --last_kv_cache_len 640 --last_kv_cache_len 768 --last_kv_cache_len 896 --last_kv_cache_len 1024  --chip AX650 -c 1 --parallel 28
 ```
 
